@@ -1,0 +1,48 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Rizik Shop BD</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7f5;color:#17321f;font-family:Arial,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(135deg,#075b3d,#0b7d55);color:#fff;padding:20px 14px;position:sticky;top:0;z-index:5}
+.head{max-width:1100px;margin:auto;text-align:center}h1{margin:0;font-size:29px}.sub{margin:6px 0 12px}
+.search{display:flex;gap:8px;max-width:700px;margin:auto}.search input{flex:1;border:0;border-radius:25px;padding:12px 16px;font-size:16px}.cart{border:0;border-radius:25px;padding:0 18px;font-weight:bold;color:#075b3d}
+.wrap{max-width:1100px;margin:auto;padding:16px}.hero{background:#fff;border-radius:18px;padding:18px;text-align:center;box-shadow:0 2px 8px #0001;margin-bottom:15px}.hero h2{margin:0 0 6px;font-size:23px}
+.cats{display:flex;gap:8px;overflow:auto;margin-bottom:18px}.cats button{white-space:nowrap;border:0;border-radius:22px;padding:10px 15px;background:#e2ebe5;font-weight:bold}.cats .active{background:#087957;color:#fff}
+.section{margin:20px 0}.section h3{background:#087957;color:#fff;display:inline-block;border-radius:10px;padding:8px 16px;margin:0 0 12px;font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 8px #0002;padding-bottom:12px;position:relative}.num{position:absolute;top:8px;left:8px;background:#087957;color:#fff;border-radius:50%;width:31px;height:31px;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:1}
+.pic{width:100%;height:190px;object-fit:cover;background:#fff}.info{padding:8px 12px}.name{font-weight:bold;font-size:18px;line-height:1.35}.unit{color:#666;margin-top:3px}.price{font-size:22px;font-weight:bold;margin:7px 0}
+.btn{display:block;width:calc(100% - 24px);margin:7px 12px 0;padding:10px;border-radius:23px;text-align:center;font-weight:bold;text-decoration:none;border:0;cursor:pointer}.add{background:#e7f3e9;color:#087957}.order{background:#111;color:#fff}
+footer{background:#073e2e;color:#fff;text-align:center;padding:25px;margin-top:30px;line-height:1.8}.wa{position:fixed;right:16px;bottom:16px;background:#087957;color:#fff;text-decoration:none;border-radius:28px;padding:13px 18px;font-weight:bold;box-shadow:0 3px 10px #0004}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}.pic{height:155px}.name{font-size:16px}.price{font-size:19px}.btn{font-size:14px}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.pic{height:210px}}
+</style></head><body>
+<header><div class="head"><h1>🛍️ RIZIK SHOP BD</h1><div class="sub">প্রিমিয়াম খেজুর ও খাঁটি পণ্যের মূল্য তালিকা ২০২৬</div>
+<div class="search"><input id="q" placeholder="পণ্য খুঁজুন..."><button class="cart" onclick="showCart()">🛒 কার্ট (<span id="count">0</span>)</button></div></div></header>
+<main class="wrap"><section class="hero"><h2>🌴 খেজুর • 🥛 ঘি ও বাটার • 🍯 মধু • 🫒 তেল ও দুধ • 🌱 ভেষজ ও সুপারফুড</h2>
+<div>খাঁটি ও মানসম্মত পণ্য — WhatsApp-এ সহজে অর্ডার করুন</div></section>
+<nav class="cats"><button class="active" onclick="setCat('all',this)">সব পণ্য</button>
+<button onclick="setCat('dates',this)">🌴 সৌদি খেজুর</button><button onclick="setCat('ghee',this)">🥛 ঘি ও বাটার</button>
+<button onclick="setCat('honey',this)">🍯 খাঁটি মধু</button><button onclick="setCat('oil',this)">🫒 তেল ও দুধ</button>
+<button onclick="setCat('super',this)">🌱 ভেষজ ও সুপারফুড</button></nav><div id="content"></div></main>
+<a class="wa" href="https://wa.me/8801778452954">💬 WhatsApp 01778452954</a><footer>Rizik Shop BD — খাঁটি পণ্য, সুস্থ জীবন<br>📞 01778452954</footer>
+<script>
+const products=[{"id": 1, "name": "শুক্কারী খেজুর", "unit": "১ কেজি বক্স", "price": "১৪৫০", "cat": "dates", "image": "images/01.jpg"}, {"id": 2, "name": "মাশরুক খেজুর", "unit": "৩ কেজি বক্স", "price": "২৭০০", "cat": "dates", "image": "images/02.jpg"}, {"id": 3, "name": "মেজদুল খেজুর", "unit": "১ কেজি বক্স", "price": "২২০০", "cat": "dates", "image": "images/03.jpg"}, {"id": 4, "name": "মাবরুম খেজুর", "unit": "১ কেজি বক্স", "price": "১৯৫০", "cat": "dates", "image": "images/04.jpg"}, {"id": 5, "name": "আম্বর খেজুর", "unit": "১ কেজি বক্স", "price": "১৮৫০", "cat": "dates", "image": "images/05.jpg"}, {"id": 6, "name": "আজওয়া খেজুর", "unit": "১ কেজি বক্স", "price": "২০০০", "cat": "dates", "image": "images/06.jpg"}, {"id": 7, "name": "সরের ঘি", "unit": "১ কেজি", "price": "১৫০০", "cat": "ghee", "image": "images/07.jpg"}, {"id": 8, "name": "ক্রিমের ঘি", "unit": "১ কেজি", "price": "১৪০০", "cat": "ghee", "image": "images/08.jpg"}, {"id": 9, "name": "আনসল্টেড বাটার", "unit": "১ কেজি", "price": "৯০০", "cat": "ghee", "image": "images/09.jpg"}, {"id": 10, "name": "সল্টেড বাটার", "unit": "১ কেজি", "price": "৯৫০", "cat": "ghee", "image": "images/10.jpg"}, {"id": 11, "name": "সুইট বাটার", "unit": "১ কেজি", "price": "৯৫০", "cat": "ghee", "image": "images/11.jpg"}, {"id": 12, "name": "লিচু ফুলের মধু", "unit": "১ কেজি", "price": "৭০০", "cat": "honey", "image": "images/12.jpg"}, {"id": 13, "name": "সরিষা ফুলের মধু", "unit": "১ কেজি", "price": "৮০০", "cat": "honey", "image": "images/13.jpg"}, {"id": 14, "name": "বড়ই ফুলের মধু", "unit": "১ কেজি", "price": "৮০০", "cat": "honey", "image": "images/14.jpg"}, {"id": 15, "name": "চাকের প্রসেস মধু", "unit": "১ কেজি", "price": "১০০০", "cat": "honey", "image": "images/15.jpg"}, {"id": 16, "name": "সুন্দরবনের খলিসা মধু", "unit": "১ কেজি", "price": "১১০০", "cat": "honey", "image": "images/16.jpg"}, {"id": 17, "name": "কালোজিরা ফুলের মধু", "unit": "১ কেজি", "price": "১৩০০", "cat": "honey", "image": "images/17.jpg"}, {"id": 18, "name": "গ্রামীণ চাকের মধু", "unit": "১ কেজি", "price": "১৪৫০", "cat": "honey", "image": "images/18.jpg"}, {"id": 19, "name": "সুন্দরবনের চাকের মধু", "unit": "১ কেজি", "price": "১৪৫০", "cat": "honey", "image": "images/19.jpg"}, {"id": 20, "name": "নারিকেল তেল", "unit": "১ লিটার", "price": "১০৬০", "cat": "oil", "image": "images/20.jpg"}, {"id": 21, "name": "এক্সট্রা ভার্জিন নারিকেল তেল", "unit": "১ লিটার", "price": "১৪০০", "cat": "oil", "image": "images/21.jpg"}, {"id": 22, "name": "সরিষা তেল", "unit": "৫ লিটার", "price": "১৩০০", "cat": "oil", "image": "images/22.jpg"}, {"id": 23, "name": "আল যউফ অলিভ অয়েল সৌদি", "unit": "৪০০ মিলি", "price": "১৭৫০", "cat": "oil", "image": "images/23.jpg"}, {"id": 24, "name": "আল মারাই মিল্ক পাউডার", "unit": "২.২৫ কেজি", "price": "৩৯৫০", "cat": "oil", "image": "images/24.jpg"}, {"id": 25, "name": "চিয়া সীড", "unit": "১ কেজি", "price": "৬০০", "cat": "super", "image": "images/25.jpg"}, {"id": 26, "name": "মরিঙ্গা পাতা", "unit": "১ কেজি", "price": "১০০০", "cat": "super", "image": "images/26.jpg"}, {"id": 27, "name": "শোধন করা আলকুশি", "unit": "১ কেজি", "price": "২০০০", "cat": "super", "image": "images/27.jpg"}, {"id": 28, "name": "বিটরুট পাউডার", "unit": "১ কেজি", "price": "২০০০", "cat": "super", "image": "images/28.jpg"}, {"id": 29, "name": "হালুয়া", "unit": "১ কেজি", "price": "২৮০০", "cat": "super", "image": "images/29.jpg"}];let cat='all',cart=[];
+const titles={"dates":"🌴 সৌদি খেজুর","ghee":"🥛 ঘি ও বাটার","honey":"🍯 খাঁটি মধু","oil":"🫒 তেল ও দুধ","super":"🌱 ভেষজ ও সুপারফুড"};
+
+function card(p){
+ return '<article class="card"><span class="num">'+p.id+'</span>'+
+ '<img class="pic" src="'+p.image+'" alt="'+p.name+'">'+
+ '<div class="info"><div class="name">'+p.name+'</div><div class="unit">'+p.unit+
+ '</div><div class="price">৳ '+p.price+'</div></div>'+
+ '<button class="btn add" onclick="addById('+p.id+')">🛒 কার্টে যোগ করুন</button>'+
+ '<a class="btn order" href="https://wa.me/8801778452954?text='+encodeURIComponent('আসসালামু আলাইকুম, '+p.name+' '+p.unit+' অর্ডার করতে চাই।')+'">অর্ডার করুন</a></article>';
+}
+
+function render(){let q=document.getElementById('q').value.toLowerCase().trim();let list=products.filter(p=>(cat==='all'||p.cat===cat)&&(!q||p.name.toLowerCase().includes(q)));
+let groups=cat==='all'?['dates','ghee','honey','oil','super']:[cat];
+document.getElementById('content').innerHTML=groups.map(function(g){let a=list.filter(function(p){return p.cat===g});if(!a.length)return '';
+return '<section class="section"><h3>'+titles[g]+'</h3><div class="grid">'+a.map(card).join('')+'</div></section>';}).join('')||'<p>কোনো পণ্য পাওয়া যায়নি।</p>';}
+function addById(id){let p=products.find(function(x){return x.id===id});cart.push(p);document.getElementById('count').textContent=cart.length;alert('কার্টে যোগ হয়েছে: '+p.name);}
+function showCart(){if(!cart.length){alert('কার্ট খালি।');return;}let t='আসসালামু আলাইকুম, আমি অর্ডার করতে চাই:\n\n'+cart.map(function(p,i){return (i+1)+'. '+p.name+' - '+p.unit+' - ৳'+p.price;}).join('\n');location.href='https://wa.me/8801778452954?text='+encodeURIComponent(t);}
+function setCat(c,b){cat=c;document.querySelectorAll('.cats button').forEach(function(x){x.classList.remove('active')});b.classList.add('active');render();}
+document.getElementById('q').addEventListener('input',render);render();
+</script></body></html>
